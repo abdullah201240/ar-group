@@ -93,7 +93,7 @@ const Navbar = () => {
   return (
     <nav
       className={`${isScrolled ? "shadow-md" : ""} fixed top-0 left-0 right-0 z-50 `}
-     
+      style={{ backgroundColor: "white", opacity: 0.95 }}
     >
       <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-6 " >
         <div className="relative flex items-center justify-between h-20">
@@ -101,7 +101,7 @@ const Navbar = () => {
           <div className="lg:hidden">
             <button
               type="button"
-              className="inline-flex items-center justify-center p-2 text-gray-400 hover:bg-[#F05924] hover:text-black focus:outline-none"
+              className="inline-flex items-center justify-center p-2 text-gray-400 hover:bg-[#007f52] hover:text-white focus:outline-none"
               aria-controls="mobile-menu"
               aria-expanded={isMenuOpen ? "true" : "false"}
               onClick={toggleMenu}
@@ -112,7 +112,7 @@ const Navbar = () => {
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
-                stroke="white"
+                stroke="black"
                 aria-hidden="true"
               >
                 <path
@@ -126,7 +126,7 @@ const Navbar = () => {
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
-                stroke="white"
+                stroke="black"
                 aria-hidden="true"
               >
                 <path
@@ -144,7 +144,7 @@ const Navbar = () => {
               <Link href="/" className="text-black text-2xl font-semibold">
                 <Image
                   src={Logo}
-                  alt="Digirib LOGO"
+                  alt="Ar Group"
                   fill
                   sizes="(max-width: 640px) 100px, (max-width: 768px) 120px, 120px"
                   style={{ objectFit: "contain" }}
@@ -158,14 +158,14 @@ const Navbar = () => {
             <div className="flex space-x-4">
               <Link
                 href="/"
-                className="px-3 py-2 text-medium font-medium text-black hover:bg-[#F05924] hover:text-black rounded-md"
+                className="px-3 py-2 text-medium font-medium text-black hover:bg-[#007f52] hover:text-white rounded-md"
                 aria-current="page"
               >
                 Home
               </Link>
               <Link
                 href="/aboutUs"
-                className="px-3 py-2 text-medium font-medium text-black hover:bg-[#F05924] hover:text-black rounded-md"
+                className="px-3 py-2 text-medium font-medium text-black hover:bg-[#007f52] hover:text-white rounded-md"
               >
                 About Us
               </Link>
@@ -173,7 +173,7 @@ const Navbar = () => {
               
               <Link
                 href="/projects"
-                className="px-3 py-2 text-medium font-medium text-black hover:bg-[#F05924] hover:text-black rounded-md"
+                className="px-3 py-2 text-medium font-medium text-black hover:bg-[#007f52] hover:text-white rounded-md"
               >
                 Our Company
               </Link>
@@ -181,19 +181,19 @@ const Navbar = () => {
 
               <Link
                 href="/career"
-                className="px-3 py-2 text-medium font-medium text-black hover:bg-[#F05924] hover:text-black rounded-md"
+                className="px-3 py-2 text-medium font-medium text-black hover:bg-[#007f52] hover:text-white rounded-md"
               >
                 Career
               </Link>
               <Link
                 href="/blog"
-                className="px-3 py-2 text-medium font-medium text-black hover:bg-[#F05924] hover:text-black rounded-md"
+                className="px-3 py-2 text-medium font-medium text-black hover:bg-[#007f52] hover:text-white rounded-md"
               >
                 Blog
               </Link>
               <Link
                 href="/contactUs"
-                className="px-3 py-2 text-medium font-medium text-black hover:bg-[#F05924] hover:text-black rounded-md"
+                className="px-3 py-2 text-medium font-medium text-black hover:bg-[#007f52] hover:text-white rounded-md"
               >
                 Contact Us
               </Link>
@@ -207,31 +207,31 @@ const Navbar = () => {
         <div className="space-y-1 px-2 pb-3 pt-2">
           <Link
             href="/"
-            className="block px-3 py-2 text-base font-medium text-black hover:bg-[#F05924] hover:text-black rounded-md"
+            className="block px-3 py-2 text-base font-medium text-black hover:bg-[#007f52] hover:text-white rounded-md"
             aria-current="page"
           >
             Home
           </Link>
           <Link
             href="/aboutUs"
-            className="block px-3 py-2 text-base font-medium text-black hover:bg-[#F05924] hover:text-black rounded-md"
+            className="block px-3 py-2 text-base font-medium text-black hover:bg-[#007f52] hover:text-white rounded-md"
           >
             About Us
           </Link>
           <div className="block">
             <button
               onClick={toggleMobileDropdown}
-              className="block w-full text-left px-3 py-2 text-base font-medium text-black hover:bg-[#F05924] hover:text-black rounded-md"
+              className="block w-full text-left px-3 py-2 text-base font-medium text-black hover:bg-[#007f52] hover:text-white rounded-md"
             >
               Services
             </button>
             {isMobileDropdownOpen && (
-              <div className="space-y-1 px-2 hover:bg-[#F05924]" >
+              <div className="space-y-1 px-2 hover:bg-[#007f52]" >
                 {services.map((service) => (
                   
                   <div key={service.id} className="flex items-center space-x-3">
                      <Link href={`/services/${service.id}`}>
-                    <button className="text-black text-left px-3 py-2 text-base font-medium hover:bg-[#F05924] rounded-md">
+                    <button className="text-black text-left px-3 py-2 text-base font-medium hover:bg-[#007f52] rounded-md">
                       {service.name}
                     </button>
                     </Link>
@@ -244,26 +244,26 @@ const Navbar = () => {
           </div>
           <Link
             href="/projects"
-            className="block px-3 py-2 text-base font-medium text-black hover:bg-[#F05924] hover:text-black rounded-md"
+            className="block px-3 py-2 text-base font-medium text-black hover:bg-[#007f52] hover:text-white rounded-md"
           >
             Projects
           </Link>
 
           <Link
             href="/career"
-            className="block px-3 py-2 text-base font-medium text-black hover:bg-[#F05924] hover:text-black rounded-md"
+            className="block px-3 py-2 text-base font-medium text-black hover:bg-[#007f52] hover:text-white rounded-md"
           >
             Career
           </Link>
           <Link
             href="/blog"
-            className="block px-3 py-2 text-base font-medium text-black hover:bg-[#F05924] hover:text-black rounded-md"
+            className="block px-3 py-2 text-base font-medium text-black hover:bg-[#007f52] hover:text-white rounded-md"
           >
             Blog
           </Link>
           <Link
             href="/contactUs"
-            className="block px-3 py-2 text-base font-medium text-black hover:bg-[#F05924] hover:text-black rounded-md"
+            className="block px-3 py-2 text-base font-medium text-black hover:bg-[#007f52] hover:text-white rounded-md"
           >
             Contact Us
           </Link>
