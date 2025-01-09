@@ -24,11 +24,11 @@ const HeroSection = React.memo(function HeroSection() {
                     </span>
                 </h2>
 
-                <h2 className=" mt-12 text-2xl line-clamp-3 md:line-clamp-none text-[#202020] leading-7  max-w-lg">
+                <h2 className=" mt-12 text-2xl line-clamp-3 md:line-clamp-none text-[#202020] leading-loose  max-w-lg">
                     Empowering Industries with Architectural,
                     Technological,  and Interior Excellence.
                 </h2>
-                <p className=" mt-8 text-lg line-clamp-3 md:line-clamp-none text-[#202020] leading-7 max-w-lg">
+                <p className=" mt-8 text-lg line-clamp-3 md:line-clamp-none text-[#202020] leading-loose max-w-lg ">
                     At AR Group, we believe in shaping a better tomorrow through innovation, expertise, and a commitment to excellence across diverse industries. With our three dynamic subsidiaries—IQ Architects Ltd, Digirib, and InterioBD—we are transforming the way architecture, technology, and interior design impact lives and businesses.
                 </p>
 

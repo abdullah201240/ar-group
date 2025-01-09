@@ -5,21 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from "@/app/assets/img/logo.webp";
 
-
-
-interface Service {
-  id: number;
-  name: string;
-  image: string;
-
-}
-
 const Navbar = () => {
-  const [services, setServices] = useState<Service[]>([]); // Store categories and subcategories
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDesktopDropdownOpen, setIsDesktopDropdownOpen] = useState(false); // Separate state for mobile dropdown
 
-  const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false); // Separate state for mobile dropdown
   const [isScrolled, setIsScrolled] = useState(false); // Track scroll position
   const [isClient, setIsClient] = useState(false); // Track if it's on the client side
 
@@ -62,27 +51,9 @@ const Navbar = () => {
 
 
 
-  // Fetch categories and subcategories from API
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}user/services`); // Replace with your API endpoint
-        const data = await response.json();
-        setServices(data);
-      } catch (error) {
-        console.error("Failed to fetch categories:", error);
-      }
-    };
-
-    fetchCategories();
-  }, []);
+ 
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
-
-  const toggleMobileDropdown = () =>
-    setIsMobileDropdownOpen((prev) => !prev); // Toggle mobile dropdown
-
-  
 
 
   // If it's not the client, return null to avoid hydration errors
@@ -172,7 +143,7 @@ const Navbar = () => {
 
               
               <Link
-                href="/projects"
+                href="/company"
                 className="px-3 py-2 text-medium font-medium text-black hover:bg-[#007f52] hover:text-white rounded-md"
               >
                 Our Company
@@ -218,36 +189,14 @@ const Navbar = () => {
           >
             About Us
           </Link>
-          <div className="block">
-            <button
-              onClick={toggleMobileDropdown}
-              className="block w-full text-left px-3 py-2 text-base font-medium text-black hover:bg-[#007f52] hover:text-white rounded-md"
-            >
-              Services
-            </button>
-            {isMobileDropdownOpen && (
-              <div className="space-y-1 px-2 hover:bg-[#007f52]" >
-                {services.map((service) => (
-                  
-                  <div key={service.id} className="flex items-center space-x-3">
-                     <Link href={`/services/${service.id}`}>
-                    <button className="text-black text-left px-3 py-2 text-base font-medium hover:bg-[#007f52] rounded-md">
-                      {service.name}
-                    </button>
-                    </Link>
-                  </div>
-                
-                ))}
-
-              </div>
-            )}
-          </div>
           <Link
-            href="/projects"
+            href="/company"
             className="block px-3 py-2 text-base font-medium text-black hover:bg-[#007f52] hover:text-white rounded-md"
           >
-            Projects
+             Our Company
           </Link>
+          
+          
 
           <Link
             href="/career"
