@@ -1,4 +1,4 @@
-import { Sequelize, DataTypes, Model, Optional } from 'sequelize';
+import {DataTypes, Model, Optional } from 'sequelize';
 import db from '../config/sequelize'; // Adjust path as needed
 
 // Define the attributes for the Admin model

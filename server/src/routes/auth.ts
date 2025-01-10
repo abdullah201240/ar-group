@@ -1,5 +1,5 @@
 import express from 'express';
-import { createAdmin, deleteAdmin, login, logout, me, viewAdmin, viewAdminById } from '../controllers/adminController'; // Adjust the import path as needed
+import { createAdmin, deleteAdmin, login, me, viewAdmin, viewAdminById } from '../controllers/authController'; // Adjust the import path as needed
 import { errorHandler } from '../error-handler';
 import authMiddleware from '../middleware/auth';
 
@@ -10,7 +10,6 @@ router.post('/createAdmin',(createAdmin));
 router.post('/login', errorHandler(login));
 
 router.get('/me',authMiddleware,errorHandler(me));
-router.post('/logout', errorHandler(logout));
 
 // Route for deleting an About record by ID
 router.delete('/admin/:id', authMiddleware,errorHandler(deleteAdmin));
