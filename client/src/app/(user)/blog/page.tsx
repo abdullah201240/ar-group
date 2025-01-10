@@ -58,7 +58,7 @@ export default function Page() {
                 title: blog.blogTitle,
                 description: blog.blogDescription,
                 image: blog.image,
-                
+
               }));
             }
 
@@ -68,7 +68,7 @@ export default function Page() {
                 title: blog.title,
                 description: blog.description,
                 image: blog.image,
-                
+
               }));
             }
             console.warn(`Unexpected response format from ${url}`);
@@ -119,7 +119,12 @@ export default function Page() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {interioBlogs.map((blog) => (
             <div key={blog.id} className="group rounded overflow-hidden shadow-lg flex flex-col transition-transform transform hover:scale-105">
-              <Link href={`/blogs/${blog.id}`} className="relative block">
+              <Link href={`https://interiobd.com/blog/${blog.id}`}
+
+                className="relative block"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Image
                   className="w-full h-56 object-cover group-hover:opacity-80 transition-opacity duration-300"
                   src={`${process.env.NEXT_PUBLIC_API_URL_INTERIO_IMAGE}${blog.image}`}
@@ -149,11 +154,16 @@ export default function Page() {
         </div>
 
         <div className="mt-16">
-          
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {iqBlogs.map((blog) => (
               <div key={blog.id} className="group rounded overflow-hidden shadow-lg flex flex-col transition-transform transform hover:scale-105">
-                <Link href={`/blogsIq/${blog.id}`} className="relative block">
+                <Link
+                  href={`https://iq-bd.com/blogs/${blog.id}`}
+                  className="relative block"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Image
                     className="w-full h-56 object-cover group-hover:opacity-80 transition-opacity duration-300"
                     src={`${process.env.NEXT_PUBLIC_API_URL_IQ}${blog.image}`}
@@ -163,6 +173,7 @@ export default function Page() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-30"></div>
                 </Link>
+
 
                 <div className="px-6 py-4 flex flex-col justify-between flex-grow">
                   <Link href={`/blogs/${blog.id}`} className="font-medium text-xl text-gray-800 hover:text-indigo-600 transition duration-300 ease-in-out mb-2">
