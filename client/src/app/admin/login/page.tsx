@@ -101,7 +101,7 @@ export default function Page() {
         <div className="min-h-96 px-8 py-6 mt-4 text-left bg-white dark:bg-gblack rounded-xl shadow-lg">
           <div className="flex flex-col justify-center items-center h-full select-none">
             <div className="flex flex-col items-center justify-center gap-2 mb-8">
-              <a href="https://amethgalarcio.web.app/" target="_blank" rel="noopener noreferrer">
+             
                 <Image
                   src={Logo}
                   alt="Iq Logo"
@@ -109,7 +109,7 @@ export default function Page() {
                   height={32}
                   className="w-8"
                 />
-              </a>
+             
               <p className="m-0 text-[16px] font-semibold text-black">Login to your Account</p>
               <span className="m-0 text-xs max-w-[90%] text-center text-black">
                 Get started with our app, just start section and enjoy the experience.
