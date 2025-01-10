@@ -32,6 +32,8 @@ interface BlogApiResponse {
 export default function Page() {
   const [interioBlogs, setInterioBlogs] = useState<Blog[]>([]);
   const [iqBlogs, setIqBlogs] = useState<Blog[]>([]);
+  const [digiribBlogs, setDigiribBlogs] = useState<Blog[]>([]);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -39,6 +41,7 @@ export default function Page() {
       const API_URLS = [
         `${process.env.NEXT_PUBLIC_API_URL_INTERIO}blog/blogs`,
         `${process.env.NEXT_PUBLIC_API_URL_IQ}user/viewBlog`,
+        `${process.env.NEXT_PUBLIC_API_URL_DIGIRIB}user/viewBlog`,
       ];
 
       try {
@@ -82,9 +85,11 @@ export default function Page() {
         const results = await Promise.all(blogPromises);
         const interioResults = results[0];
         const iqResults = results[1];
+        const digiribResults = results[2];
 
         setInterioBlogs(interioResults);
         setIqBlogs(iqResults);
+        setDigiribBlogs(digiribResults);
       } catch (error) {
         console.error('Error fetching blogs:', error);
       } finally {
@@ -136,14 +141,14 @@ export default function Page() {
               </Link>
 
               <div className="px-6 py-4 flex flex-col justify-between flex-grow">
-                <Link href={`/blogs/${blog.id}`} className="font-medium text-xl text-gray-800 hover:text-indigo-600 transition duration-300 ease-in-out mb-2">
+                <Link href={`https://interiobd.com/blog/${blog.id}`} className="font-medium text-xl text-gray-800 hover:text-indigo-600 transition duration-300 ease-in-out mb-2">
                   {blog.title}
                 </Link>
 
                 <p className="text-gray-600 text-sm leading-relaxed mb-4">{getTextFromHTML(blog.description).slice(0, 100)}...</p>
 
                 <Link
-                  href={`/blogs/${blog.id}`}
+                  href={`https://interiobd.com/blog/${blog.id}`}
                   className="text-indigo-600 text-sm font-semibold hover:text-indigo-800 transition duration-300 ease-in-out"
                 >
                   Read More →
@@ -176,14 +181,14 @@ export default function Page() {
 
 
                 <div className="px-6 py-4 flex flex-col justify-between flex-grow">
-                  <Link href={`/blogs/${blog.id}`} className="font-medium text-xl text-gray-800 hover:text-indigo-600 transition duration-300 ease-in-out mb-2">
+                  <Link href={`https://iq-bd.com/blogs/${blog.id}`} className="font-medium text-xl text-gray-800 hover:text-indigo-600 transition duration-300 ease-in-out mb-2">
                     {blog.title}
                   </Link>
 
                   <p className="text-gray-600 text-sm leading-relaxed mb-4">{getTextFromHTML(blog.description).slice(0, 100)}...</p>
 
                   <Link
-                    href={`/blogs/${blog.id}`}
+                    href={`https://iq-bd.com/blogs/${blog.id}`}
                     className="text-indigo-600 text-sm font-semibold hover:text-indigo-800 transition duration-300 ease-in-out"
                   >
                     Read More →
@@ -193,6 +198,54 @@ export default function Page() {
             ))}
           </div>
         </div>
+
+
+
+        <div className="mt-16">
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {digiribBlogs.map((blog) => (
+              <div key={blog.id} className="group rounded overflow-hidden shadow-lg flex flex-col transition-transform transform hover:scale-105">
+                <Link
+                  href={`https://digirib.com/blogs/${blog.id}`}
+                  className="relative block"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    className="w-full h-56 object-cover group-hover:opacity-80 transition-opacity duration-300"
+                    src={`${process.env.NEXT_PUBLIC_API_URL_DIGIRIB}${blog.image}`}
+                    alt={blog.title}
+                    width={500}
+                    height={300}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-30"></div>
+                </Link>
+
+
+                <div className="px-6 py-4 flex flex-col justify-between flex-grow">
+                  <Link href={`https://digirib.com/blogs/${blog.id}`} className="font-medium text-xl text-gray-800 hover:text-indigo-600 transition duration-300 ease-in-out mb-2">
+                    {blog.title}
+                  </Link>
+
+                  <p className="text-gray-600 text-sm leading-relaxed mb-4">{getTextFromHTML(blog.description).slice(0, 100)}...</p>
+
+                  <Link
+                    href={`https://digirib.com/blogs/${blog.id}`}
+                    className="text-indigo-600 text-sm font-semibold hover:text-indigo-800 transition duration-300 ease-in-out"
+                  >
+                    Read More →
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+
+
+
+
       </div>
 
       <Whatsapp />

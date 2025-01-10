@@ -18,7 +18,7 @@ export default function Blog() {
         const fetchBlogs = async () => {
             try {
                 const response = await fetch(
-                    `${process.env.NEXT_PUBLIC_API_URL}user/viewBlog`
+                    `${process.env.NEXT_PUBLIC_API_URL_IQ}user/viewBlog`
                 );
                 const result = await response.json();
                 setBlog(result.data || []);
@@ -35,8 +35,8 @@ export default function Blog() {
         return tempElement.textContent || tempElement.innerText || "";
     };
 
-    // Display the last 2 blogs
-    const latestBlogs = blog.slice(-2);
+    // Display the last 3 blogs
+    const latestBlogs = blog.slice(-3);
 
     return (
 
@@ -50,18 +50,18 @@ export default function Blog() {
                 <h2 className="text-2xl sm:text-4xl font-semibold text-[#202020] mt-2">BLOG</h2>
             </div>
 
-            <div className="flex justify-center mx-auto max-w-7xl">
+            <div className="flex justify-center mx-auto max-w-7xl mt-16">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 px-4">
                     {latestBlogs.map((member) => (
                         <div
                             key={member.id}
                             className="bg-white  rounded-lg shadow-lg hover:shadow-2xl transform transition duration-300 hover:scale-105"
                         >
-                            <Link href={`/blogs/${member.id}`}>
+                            <Link href={`https://iq-bd.com/blogs/${member.id}`}>
 
                                 <Image
                                     className="w-full h-56 object-cover "
-                                    src={`${process.env.NEXT_PUBLIC_API_URL_IMAGE}${member.image}`}
+                                    src={`${process.env.NEXT_PUBLIC_API_URL_IQ}${member.image}`}
                                     alt={member.title}
                                     width={500}
                                     height={300}

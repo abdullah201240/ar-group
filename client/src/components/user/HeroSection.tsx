@@ -8,7 +8,7 @@ const HeroSection = React.memo(function HeroSection() {
         <div className="relative w-full h-screen overflow-hidden bg-cover bg-center sm:bg-hero-pattern bg-[#f0f8ff]">
 
 
-            <div className="mx-auto max-w-7xl   relative z-20 flex flex-col  mt-12 h-full  px-4 py-20 lg:pt-48">
+            <div className="mx-auto max-w-7xl   relative z-20 flex flex-col  mt-12 h-full  px-4 py-20 lg:pt-24">
                 <h2 className="font-display text-4xl tracking-normal text-[#202020] sm:text-7xl">
                     Welcome to
 
