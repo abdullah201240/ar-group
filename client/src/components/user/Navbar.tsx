@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "@/app/assets/img/logo.webp";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -71,6 +70,7 @@ const Navbar = () => {
           {/* Mobile and Tablet menu button */}
           <div className="lg:hidden">
             <button
+            
               type="button"
               className="inline-flex items-center justify-center p-2 text-gray-400 hover:bg-[#007f52] hover:text-white focus:outline-none"
               aria-controls="mobile-menu"
@@ -113,13 +113,12 @@ const Navbar = () => {
           <div className="flex items-center">
             <div className="grid-element relative w-32 h-16">
               <Link href="/" className="text-black text-2xl font-semibold">
-                <Image
-                  src={Logo}
-                  alt="Ar Group"
-                  fill
-                  sizes="(max-width: 640px) 100px, (max-width: 768px) 120px, 120px"
-                  style={{ objectFit: "contain" }}
-                />
+              <Image
+                    src="/logo.webp"
+                    alt='Ar Group'
+                    height={120}
+                    width={120}
+                  />
               </Link>
             </div>
           </div>
