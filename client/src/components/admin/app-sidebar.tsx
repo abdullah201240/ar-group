@@ -21,10 +21,12 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
 
 import Image from "next/image";
 import logo from "@/app/assets/img/logo.webp";
 import Link from "next/link";
+import { useState } from "react";
 
 // Logo Component
 function Logo() {
@@ -85,6 +87,36 @@ const items = [
 ];
 
 export function AppSidebar() {
+  const router = useRouter();
+
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  // Handle Logout
+  const handleLogout = async () => {
+    if (isLoggingOut) return; // Prevent multiple clicks
+    setIsLoggingOut(true);
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}admin/auth/logout`, {
+        method: "POST",
+        credentials: "include", // Ensure cookies are sent
+      });
+
+      if (response.ok) {
+        // Remove token from localStorage
+        localStorage.removeItem("sessionToken");
+
+        // Redirect to the login page
+        router.push("/admin/login");
+      } else {
+        console.error("Logout failed:", await response.text());
+      }
+    } catch (error) {
+      console.error("Error logging out:", error);
+    } finally {
+      setIsLoggingOut(false);
+    }
+  };
+
   return (
     <Sidebar className="w-64 bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white h-full">
       <SidebarContent>
@@ -118,13 +150,14 @@ export function AppSidebar() {
 
         {/* Log Out Section */}
         <div className="mt-auto px-4 py-4 border-t border-gray-300 dark:border-gray-700">
-          <Link
-            href="#logout"
+        <button
+            onClick={handleLogout}
+            disabled={isLoggingOut}
             className="flex items-center gap-3 text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-500"
           >
             <LogOut className="w-5 h-5" />
-            <span>Log Out</span>
-          </Link>
+            <span>{isLoggingOut ? "Logging out..." : "Log Out"}</span>
+          </button>
         </div>
       </SidebarContent>
     </Sidebar>

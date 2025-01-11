@@ -1,5 +1,5 @@
 import express from 'express';
-import { createAdmin, deleteAdmin, login, me, viewAdmin, viewAdminById } from '../controllers/authController'; // Adjust the import path as needed
+import { createAdmin, deleteAdmin, login, logout, me, viewAdmin, viewAdminById } from '../controllers/authController'; // Adjust the import path as needed
 import { errorHandler } from '../error-handler';
 import authMiddleware from '../middleware/auth';
 
@@ -21,5 +21,6 @@ router.get('/admin',authMiddleware, errorHandler(viewAdmin));
 router.get('/admin/:id',authMiddleware, errorHandler(viewAdminById));
 
 
+router.post('/logout', errorHandler(logout));
 
 export default router;

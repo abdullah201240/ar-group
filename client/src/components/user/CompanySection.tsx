@@ -1,10 +1,16 @@
+'use client';
 import React from "react";
 import Image from "next/image";
 import iq from "@/app/assets/img/IQBD.webp";
 import digirib from "@/app/assets/img/Digirib.webp";
 import intero from "@/app/assets/img/Interio.webp";
 import Link from "next/link";
+
+
+
+
 const CompanySection = () => {
+    
     return (
         <section className="bg-[#f0f8ff] py-12 relative">
 

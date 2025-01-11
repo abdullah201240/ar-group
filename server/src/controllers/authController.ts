@@ -6,6 +6,7 @@ import { UnprocessableEntity } from '../exceptions/validation';
 import { BadRequestException } from '../exceptions/bad-requests';
 import { ErrorCode } from '../exceptions/root';
 import { loginSchema, signupSchema } from '../schema/adminSchema';
+import { UnauthorizedException } from '../exceptions/unauthorized';
 const JWT_SECRET = process.env.JWT_SECRET_KEY || "12sawegg23grr434"; // Fallback to a hardcoded secret if not in env
 
 export const createAdmin = async (req: Request, res: Response, next: NextFunction): Promise<any | Response> => {
@@ -152,4 +153,24 @@ export const deleteAdmin = async (req: Request, res: Response, next: NextFunctio
     const reqWithAdmin = req as Request & { admin: Admin }; // Manually cast the request type
     const { name, email, phone, dob, gender } = reqWithAdmin.admin.dataValues; // Extract only required fields
     res.json({ name, email, phone, dob, gender }); // Return only desired fields
+  };
+
+
+  export const logout = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+    
+      // Clear the token cookie
+      res.clearCookie('token', { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+  
+      // Set token expiration time to a past date
+      const token = req.cookies.token; // Retrieve the token
+      if (token) {
+        jwt.verify(token, JWT_SECRET, (err: any) => {
+          if (!err) {
+            const blacklistedToken = { token }; // Add to blacklisted tokens if needed (optional)
+            // Perform additional storage (e.g., in memory, file, etc.) if blacklisting is required
+          }
+        });
+      }
+  
+      return res.status(200).json({ message: 'Logout successful' });
   };

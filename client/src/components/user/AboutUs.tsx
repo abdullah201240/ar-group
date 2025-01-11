@@ -1,17 +1,63 @@
-
-import React from 'react'
+'use client';
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
-import OurStory from '@/app/assets/img/OurStory.webp'
+
+interface Data {
+
+    ourStory: string;
+    mission: string;
+    vision: string;
+    ourStoryImage: string;
+}
+
+interface ApiResponse {
+    message: string;
+    data: Data;
+}
+
 
 export default function AboutUs() {
+    const [apiData, setApiData] = useState<ApiResponse | null>(null);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}admin/about/1`); // Replace with your API endpoint
+                const result = await response.json();
+                setApiData(result);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                setLoading(false);
+            }
+        }
+
+        fetchData();
+    }, []);
+
+    if (loading) {
+        return <div>Loading...</div>; // Loading state
+    }
+
+    if (!apiData || !apiData.data) {
+        return <div>Error loading data</div>; // Handle error state
+    }
+
+    const {
+        ourStory,
+        mission,
+        vision,
+        ourStoryImage,
+
+    } = apiData.data;
     return (
         <div>
             <section className="bg-[#f0f8ff] py-12 relative px-4 sm:px-8">
                 {/* Background Heading */}
-                
+
                 <h1 className="absolute top-4 left-1/2 transform -translate-x-1/2 text-[20vw] sm:text-7xl md:text-9xl font-bold text-[#E6F3FB] opacity-1 z-0">
-                ABOUT US
-            </h1>
+                    ABOUT US
+                </h1>
 
                 {/* Main Heading */}
                 <div className="text-center relative z-10">
@@ -22,32 +68,33 @@ export default function AboutUs() {
                     {/* Image Section */}
                     <div className="relative md:w-1/2 overflow-hidden group">
                         <Image
-                            src={OurStory}
+                            src={`${process.env.NEXT_PUBLIC_API_URL}${ourStoryImage}`}
                             alt="Why Digirib"
                             width={800}
                             height={800}
                             className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-110"
                         />
                     </div>
-                    
+
                     {/* Content Section */}
                     <div className="md:w-1/2 md:pl-8 mt-8 md:mt-0">
                         <div className="border-b border-[#C7C7C7] mb-4">
                             <p className="text-black leading-loose text-lg mb-4">
-                                <span className="text-[#007f52] font-bold">AR Group</span> is a visionary parent company uniting three dynamic subsidiaries—IQ Architects Ltd, Digirib, and InterioBD—under one umbrella. Established with the mission to innovate and empower industries, AR Group operates across architecture, technology, and interior design, delivering transformative solutions that redefine excellence.
+
+                                {ourStory}
+
                             </p>
                         </div>
                         <div className="mt-6">
                             <h1 className="text-[#EA5A28] text-xl sm:text-3xl font-bold">OUR MISSION</h1>
                             <p className="text-black mt-2 lleading-loose text-lg">
-                                To empower industries by providing cutting-edge architectural designs, pioneering technological solutions, and inspiring interior products that meet the evolving needs of our customers.
+                                {mission}
                             </p>
                         </div>
                         <div className="mt-6">
                             <h1 className="text-[#EA5A28] text-xl sm:text-3xl font-bold">OUR VISION</h1>
                             <p className="text-black mt-2 leading-loose  text-lg">
-                                To be a global leader, driving innovation and excellence across diverse industries while creating value for our clients and enriching lives.
-                            </p>
+                                {vision}                            </p>
                         </div>
                     </div>
                 </div>

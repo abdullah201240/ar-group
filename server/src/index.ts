@@ -11,7 +11,7 @@ import { errorMiddleware } from './middleware/error'; // Adjust path as needed
 import cookieParser from 'cookie-parser'; // Import cookie-parser
 import compression from 'compression'; // Import compression
 import bodyParser from 'body-parser';
-import { NextFunction, Request, Response } from 'express';
+import {Request, Response } from 'express';
 
 dotenv.config();
 

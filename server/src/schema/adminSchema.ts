@@ -42,5 +42,31 @@ const signupSchema = z.object({
     password: z.string()
       .min(1, 'Password is required'),
   });
+  const aboutSchema = z.object({
+    
+    chairmanDescription: z.string(),
+    
+    mdDescription: z.string(),
+    
+    mdDigiribDescription: z.string(),
+    
+    ourStory: z.string(),
+    mission: z.string(),
+    vision: z.string(),
+  })
 
-  export {signupSchema,loginSchema};
+  const contactsSchema = z.object({
+    name: z.string(),  // Ensures the title is a string
+    phone: z.string(),  // Ensures the subTitle is a string
+    email: z.string().email(), // Ensures that the email is in a valid format
+    subject: z.string(),  // Ensures the description is a string
+    massage: z.string(),
+  });
+
+  const companySchema = z.object({
+    description: z.string(),  // Ensures the title is a string
+    description1: z.string(),  // Ensures the subTitle is a string
+    description2: z.string(), // Ensures that the email is in a valid format
+  });
+  
+  export {companySchema,contactsSchema,aboutSchema,signupSchema,loginSchema};

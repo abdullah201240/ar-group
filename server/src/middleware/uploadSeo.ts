@@ -14,10 +14,14 @@ const storage = multer.diskStorage({
         cb(null, uploadDir);
     },
     filename: (req: Request, file, cb) => {
-        const ext = path.extname(file.originalname); // Keep original extension
-        cb(null, `${Date.now()}${ext}`);
+        const originalName = file.originalname;
+        const ext = path.extname(originalName); // Keep original extension
+        const timestamp = Date.now();
+        const uniqueName = `${timestamp}_${originalName}`;
+        cb(null, uniqueName);
     },
 });
+
 
 const fileFilter = (req: Request, file: Express.Multer.File, cb: FileFilterCallback) => {
     const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp', 'image/avif'];
@@ -38,8 +42,9 @@ const uploadSeo = multer({
 });
 
 // Compress image with an initial resize and limited quality adjustment
-const compressImage = async (filePath: string): Promise<string> => {
-    const compressedPath = filePath.replace(path.extname(filePath), '.webp'); // Replace original extension with .webp
+const compressImage = async (file: Express.Multer.File): Promise<string> => {
+    const filePath = path.join(uploadDir, file.filename);
+    const compressedPath = filePath.replace(path.extname(file.filename), '.webp'); // Replace original extension with .webp
     const targetSize = 100 * 1024; // 25 KB target
     const maxWidth = 800; // Resize to max width if larger, reducing compression load
     let quality = 80;
@@ -61,7 +66,7 @@ const compressImage = async (filePath: string): Promise<string> => {
         compressedBuffer = await image.webp({ quality }).toBuffer();
     }
 
-    // Save compressed image and return path
+    // Save compressed image and update file properties
     await sharp(compressedBuffer).toFile(compressedPath);
     return compressedPath;
 };
@@ -75,11 +80,10 @@ const compressImageMiddlewareSeo = async (req: Request, res: Response, next: Nex
             // Map file compression promises for parallel processing
             const compressionTasks = Object.keys(files).flatMap((key) =>
                 files[key].map(async (file) => {
-                    const filePath = path.join(uploadDir, file.filename);
-                    const compressedPath = await compressImage(filePath);
+                    const compressedPath = await compressImage(file);
 
                     // Remove the original file and update compressed path
-                    fs.unlinkSync(filePath);
+                    fs.unlinkSync(path.join(uploadDir, file.filename));
                     file.path = compressedPath;
                     file.filename = path.basename(compressedPath); // Ensure file name ends with .webp
                 })

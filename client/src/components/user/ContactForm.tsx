@@ -9,7 +9,7 @@ export default function ContactForm() {
     email: "",
     subject: "",
     phone: "",
-    description: "",
+    massage: "",
   });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -21,7 +21,7 @@ export default function ContactForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}user/contacts`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}admin/contacts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export default function ContactForm() {
           email: "",
           subject: "",
           phone: "",
-          description: "",
+          massage: "",
         });
       } else {
         const errorData = await response.json();
@@ -97,8 +97,8 @@ export default function ContactForm() {
               />
             </div>
             <textarea
-              name="description"
-              value={formData.description}
+              name="massage"
+              value={formData.massage}
               onChange={handleChange}
               placeholder="Enter Message"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 h-28"
